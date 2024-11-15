@@ -146,6 +146,13 @@ const program = new Commander.Command(packageJson.name)
   Explicitly tell the CLI to reset any stored preferences
 `
   )
+  .option(
+    '--skip-install',
+    `
+
+  Skip dependancy installation
+`
+  )
   .allowUnknownOption()
   .parse(process.argv)
 
@@ -363,6 +370,25 @@ async function run(): Promise<void> {
       }
     }
 
+    if (!process.argv.includes('--skip-install')) {
+      if (ciInfo.isCI) {
+        program.srcDir = getPrefOrDefault('skip-install')
+      } else {
+        const styledSkipDeps = blue('`Skip dependancy install')
+        const { skipInstall } = await prompts({
+          onState: onPromptState,
+          type: 'toggle',
+          name: 'skipInstall',
+          message: `Would you like to ${styledSkipDeps}?`,
+          initial: getPrefOrDefault('skipInstall'),
+          active: 'Yes',
+          inactive: 'No',
+        })
+        program.skipInstall = Boolean(skipInstall)
+        preferences.skipInstall = Boolean(skipInstall)
+      }
+    }
+
     if (!process.argv.includes('--app') && !process.argv.includes('--no-app')) {
       if (ciInfo.isCI) {
         program.app = getPrefOrDefault('app')
@@ -438,6 +464,7 @@ async function run(): Promise<void> {
       appRouter: program.app,
       srcDir: program.srcDir,
       importAlias: program.importAlias,
+      skipInstall: program.skipInstall,
     })
   } catch (reason) {
     if (!(reason instanceof DownloadError)) {
@@ -466,6 +493,7 @@ async function run(): Promise<void> {
       appRouter: program.app,
       srcDir: program.srcDir,
       importAlias: program.importAlias,
+      skipInstall: program.skipInstall,
     })
   }
   conf.set('preferences', preferences)

@@ -38,6 +38,7 @@ export const installTemplate = async ({
   eslint,
   srcDir,
   importAlias,
+  skipInstall,
 }: InstallTemplateArgs) => {
   console.log(bold(`Using ${packageManager}.`));
 
@@ -240,19 +241,23 @@ export const installTemplate = async ({
     JSON.stringify(packageJson, null, 2) + os.EOL,
   );
 
-  console.log("\nInstalling dependencies:");
-  for (const dependency in packageJson.dependencies)
-    console.log(`- ${cyan(dependency)}`);
-
-  if (devDeps) {
-    console.log("\nInstalling devDependencies:");
-    for (const dependency in packageJson.devDependencies)
+  if (!skipInstall) {
+    console.log("\nInstalling dependencies:");
+    for (const dependency in packageJson.dependencies)
       console.log(`- ${cyan(dependency)}`);
+
+    if (devDeps) {
+      console.log("\nInstalling devDependencies:");
+      for (const dependency in packageJson.devDependencies)
+        console.log(`- ${cyan(dependency)}`);
+    }
+
+    await install(packageManager, isOnline);
+  } else {
+    console.log("Skipping dependency installation...");
   }
 
   console.log();
-
-  await install(packageManager, isOnline);
 };
 
 export * from "./types";
