@@ -1,18 +1,18 @@
 {
   "name": "create-next-app-no-deps",
-  "version": "14.2.18",
+  "version": "1.0.0",
   "keywords": [
     "react",
     "next",
     "next.js"
   ],
-  "description": "Create Next.js-powered React apps with one command",
+  "description": "Create a MODIFIED Next.js-powered React apps with one command (without dependancy installation",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vercel/next.js",
+    "url": "https://github.com/luke-buttifant/next.js",
     "directory": "packages/create-next-app"
   },
-  "author": "Next.js Team <support@vercel.com>",
+  "author": "Luke",
   "license": "MIT",
   "bin": {
     "create-next-app": "./dist/index.js"
