@@ -1,6 +1,6 @@
 {
   "name": "create-next-app-no-deps",
-  "version": "1.0.0",
+  "version": "14.2.18",
   "keywords": [
     "react",
     "next",
@@ -9,13 +9,13 @@
   "description": "Create a MODIFIED Next.js-powered React apps with one command (without dependancy installation",
   "repository": {
     "type": "git",
-    "url": "https://github.com/luke-buttifant/next.js",
+    "url": "git+https://github.com/luke-buttifant/next.js.git",
     "directory": "packages/create-next-app"
   },
   "author": "Luke",
   "license": "MIT",
   "bin": {
-    "create-next-app": "./dist/index.js"
+    "create-next-app-no-deps": "dist/index.js"
   },
   "files": [
     "dist"
@@ -38,7 +38,7 @@
     "@types/validate-npm-package-name": "3.0.0",
     "@vercel/ncc": "0.34.0",
     "async-retry": "1.3.1",
-    "ci-info": "watson/ci-info#f43f6a1cefff47fb361c88cf4b943fdbcaafe540",
+    "ci-info": "github:watson/ci-info#f43f6a1cefff47fb361c88cf4b943fdbcaafe540",
     "commander": "2.20.0",
     "conf": "10.2.0",
     "cross-spawn": "7.0.3",

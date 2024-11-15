@@ -126,7 +126,7 @@
     "cookie": "0.4.1",
     "cors": "2.8.5",
     "coveralls": "3.0.3",
-    "create-next-app": "workspace:*",
+    "create-next-app-no-deps": "workspace:*",
     "critters": "0.0.6",
     "cross-env": "6.0.3",
     "cross-spawn": "6.0.5",
